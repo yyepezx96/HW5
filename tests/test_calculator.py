@@ -1,10 +1,28 @@
-'''My Calculator Test'''
-from calculator import add, subtract
+import pytest
+from calculator.commands import AddCommand, SubtractCommand, MultiplyCommand, DivideCommand
 
-def test_addition():
-    '''Test that addition function works '''    
-    assert add(2,2) == 4
+def test_add():
+    add_command = AddCommand()
+    result = add_command.execute(2, 3)
+    assert result == 5
 
-def test_subtraction():
-    '''Test that addition function works '''    
-    assert subtract(2,2) == 0
+def test_subtract():
+    subtract_command = SubtractCommand()
+    result = subtract_command.execute(5, 3)
+    assert result == 2
+
+def test_multiply():
+    multiply_command = MultiplyCommand()
+    result = multiply_command.execute(2, 3)
+    assert result == 6
+
+def test_divide():
+    divide_command = DivideCommand()
+    result = divide_command.execute(6, 3)
+    assert result == 2
+
+def test_divide_by_zero():
+    divide_command = DivideCommand()
+    with pytest.raises(ValueError):
+        divide_command.execute(6, 0)
+
